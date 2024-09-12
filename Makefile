@@ -22,8 +22,11 @@ VERSION=$(shell ./version.sh)
 
 # Build the container
 build: ## Build the release and develoment container. The development
-	docker build -t $(APP_NAME) .
+	docker build --platform linux/arm64 -t $(APP_NAME) .
 
+# Push the container TODO: make dynamic
+push: ## Build the release and develoment container. The development
+	docker push 381492125334.dkr.ecr.us-west-2.amazonaws.com/sqs_consumer:latest
 
 run: stop ## Run container on port configured in `config.env`
 	docker run -i -t --rm --env-file=./config.env -p=$(PORT):$(PORT) --name="$(APP_NAME)" $(APP_NAME)

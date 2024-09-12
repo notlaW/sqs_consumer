@@ -12,6 +12,8 @@ resource "aws_lambda_function" "sqs_consumer_function" {
   image_uri     = "${data.aws_ecr_repository.sqs_consumer_ecr_repo.repository_url}:latest"
   package_type  = "Image"
 
+  architectures = ["arm64"]
+
   role = aws_iam_role.sqs_consumer_function_role.arn
 
   environment {
